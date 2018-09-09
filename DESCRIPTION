@@ -1,0 +1,19 @@
+Package: rewind
+Type: Package
+Title: REsampling With Implicit DepeNDencies
+Version: 0.1.0
+Authors@R: c(person("Nuno", "M. Moniz", email = "nmmoniz@inesctec.pt",
+                                        role = c("aut","cre")),
+           person("Paula", "Branco", email = "pobranco@inesctec.pt",
+                                        role = "aut"),
+           person("Luís", "Torgo", email = "ltorgo@dal.ca",
+                                        role = c("aut","ctb")),
+           person("Mariana", "Oliveira", email = "mariana.r.oliveira@inesctec.pt",
+                                        role = c("ctb")))
+Description: For Imbalanced Domain Learning, resampling strategies are some of the most known strategies. This packages focuses on the problem of predicting extreme numerical values in dependency-oriented data such as time series. The package rewind presents a set of biased resampling strategies which are focused on applying such methods while taking into account the dependencies between consecutive data points in time.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Imports: UBL, lubridate, xts, DMwR
+RoxygenNote: 6.0.1
+NeedsCompilation: yes
