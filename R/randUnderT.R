@@ -7,7 +7,7 @@
 #' @param C.perc is a list containing the under-sampling percentage/s to apply to all/each "class" obtained with the relevance threshold. This percentage represents the percentage of examples that is maintained in each "class". Examples are randomly removed in each "class". Moreover, different percentages may be provided for each "class". Alternatively, it may be "balance" or "extreme", cases where the under-sampling percentages are automatically estimated.
 #' @param repl is it allowed to perform sampling with replacement (bootstrapping)
 #'
-#' @return
+#' @return a new training data set resulting from the application of the resampling strategy
 #' @export
 #'
 #' @examples

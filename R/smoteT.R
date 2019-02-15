@@ -11,7 +11,7 @@
 #' @param dist is the distance measure to be used (defaults to "Euclidean"). Use "HEOM" if there are nominal and numerical predictors
 #' @param p is a parameter used when a p-norm is computed
 #'
-#' @return
+#' @return a new training data set resulting from the application of the resampling strategy
 #' @export
 #'
 #' @examples
@@ -162,7 +162,6 @@ smoteT <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
 #'
 #' @return
 #'
-#' @examples
 smote.exsT <- function(data, tgt, N, k, dist, p) {
 
   nomatr <- c()

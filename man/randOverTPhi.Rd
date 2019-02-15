@@ -4,8 +4,8 @@
 \alias{randOverTPhi}
 \title{Temporal and Relevance Biased Random Oversampling}
 \usage{
-randOverTPhi(form, dat, rel = "auto", thr.rel = 0.5, C.perc = "balance",
-  repl = TRUE)
+randOverTPhi(form, dat, rel = "auto", thr.rel = 0.5,
+  C.perc = "balance", repl = TRUE)
 }
 \arguments{
 \item{form}{a model formula}

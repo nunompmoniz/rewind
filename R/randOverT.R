@@ -8,7 +8,7 @@
 #' all/each "class" obtained with the relevance threshold. The percentage represents the percentage of replicas that are added. Replicas of the examples are added randomly in each "class". Moreover, different percentages may be provided for each "class". Alternatively, it may be "balance" (the default) or "extreme", cases where the over-sampling percentages are automatically estimated.
 #' @param repl is it allowed to perform sampling with replacement (bootstrapping). Defaults to TRUE because if the over-sampling percentage is >2 this is necessary.
 #'
-#' @return
+#' @return a new training data set resulting from the application of the resampling strategy
 #' @export
 #'
 #' @examples

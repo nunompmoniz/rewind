@@ -10,8 +10,9 @@
 #' @param repl is it allowed to perform sampling with replacement (bootstrapping).
 #' @param dist is the distance measure to be used (defaults to "Euclidean"). Use "HEOM" if there are nominal and numerical predictors
 #' @param p is a parameter used when a p-norm is computed
+#' @param delta for cases where data is extremely unbalanced and the majority of sampling probabilities are close zero, this is added to such probabilities
 #'
-#' @return
+#' @return a new training data set resulting from the application of the resampling strategy
 #' @export
 #'
 #' @examples
@@ -24,7 +25,7 @@
 #' smoteTPhi.Ext <- smoteTPhi(V10 ~ ., ds, C.perc="extreme")
 #'
 smoteTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
-  k=5, repl=FALSE, dist="Euclidean", p=2) {
+  k=5, repl=FALSE, dist="Euclidean", p=2, delta=0.01) {
 
   suppressWarnings(suppressPackageStartupMessages(library('uba')))
 
@@ -60,8 +61,10 @@ smoteTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
   }
 
   temp <- y.relev <- phi(s.y,pc)
+
   if(!length(which(temp<1)))stop("All the points have relevance 1. Please, redefine your relevance function!")
   if(!length(which(temp>0)))stop("All the points have relevance 0. Please, redefine your relevance function!")
+
   temp[which(y.relev>thr.rel)] <- -temp[which(y.relev>thr.rel)]
   bumps <- c()
   for(i in 1:(length(y)-1)){if(temp[i]*temp[i+1]<0) bumps <- c(bumps,i)}
@@ -75,8 +78,8 @@ smoteTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
     obs.ind[[i]] <- s.y[last:bumps[i]]
     last <- bumps[i] +1
   }
-  obs.ind[[nbumps]] <- s.y[last:length(s.y)]
 
+  obs.ind[[nbumps]] <- s.y[last:length(s.y)]
 
   newdata <- data.frame()
 
@@ -137,7 +140,12 @@ smoteTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
         s.rel <- phi(sdata[,tgt],pc)
         probsU <- probs*s.rel
 
-        sel <- sample(rownames(sdata),C.perc[[i]]*r, replace=repl, prob=probsU)
+        sel = tryCatch({
+          sample(rownames(sdata),C.perc[[i]]*r, replace=repl, prob=probsU)
+        }, error = function(e) {
+          sample(rownames(sdata),C.perc[[i]]*r, replace=repl, prob=probsU+delta)
+        })
+
         newdata <- rbind(newdata, data[sel,])
 
       }

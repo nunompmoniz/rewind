@@ -5,7 +5,7 @@
 #' @param ts the data structure with the time series data
 #' @param embed the size of the embed, defaults to 10
 #'
-#' @return
+#' @return a data frame with the time delay embedding of the time series
 #' @export
 #'
 #' @examples

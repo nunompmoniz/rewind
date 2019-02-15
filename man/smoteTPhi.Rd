@@ -4,8 +4,9 @@
 \alias{smoteTPhi}
 \title{Temporal and Relevance Biased SMOTE}
 \usage{
-smoteTPhi(form, data, rel = "auto", thr.rel = 0.5, C.perc = "balance",
-  k = 5, repl = FALSE, dist = "Euclidean", p = 2)
+smoteTPhi(form, data, rel = "auto", thr.rel = 0.5,
+  C.perc = "balance", k = 5, repl = FALSE, dist = "Euclidean",
+  p = 2, delta = 0.01)
 }
 \arguments{
 \item{form}{a model formula}
@@ -26,6 +27,8 @@ all/each "class" obtained with the relevance threshold. The percentage represent
 \item{dist}{is the distance measure to be used (defaults to "Euclidean"). Use "HEOM" if there are nominal and numerical predictors}
 
 \item{p}{is a parameter used when a p-norm is computed}
+
+\item{delta}{for cases where data is extremely unbalanced and the majority of sampling probabilities are close zero, this is added to such probabilities}
 }
 \value{
 a new training data set resulting from the application of the resampling strategy

@@ -4,8 +4,8 @@
 \alias{randUnderT}
 \title{Temporal-Biased Random Undersampling}
 \usage{
-randUnderT(form, data, rel = "auto", thr.rel = 0.5, C.perc = "balance",
-  repl = FALSE)
+randUnderT(form, data, rel = "auto", thr.rel = 0.5,
+  C.perc = "balance", repl = FALSE)
 }
 \arguments{
 \item{form}{a model formula}
