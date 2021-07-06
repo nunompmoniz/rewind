@@ -4,8 +4,17 @@
 \alias{smoteT}
 \title{Temporal Biased SMOTE}
 \usage{
-smoteT(form, data, rel = "auto", thr.rel = 0.5, C.perc = "balance",
-  k = 5, repl = FALSE, dist = "Euclidean", p = 2)
+smoteT(
+  form,
+  data,
+  rel = "auto",
+  thr.rel = 0.5,
+  C.perc = "balance",
+  k = 5,
+  repl = FALSE,
+  dist = "Euclidean",
+  p = 2
+)
 }
 \arguments{
 \item{form}{a model formula}

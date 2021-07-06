@@ -27,7 +27,7 @@
 smoteTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
   k=5, repl=FALSE, dist="Euclidean", p=2, delta=0.01) {
 
-  suppressWarnings(suppressPackageStartupMessages(library('uba')))
+  suppressWarnings(suppressPackageStartupMessages(library('IRon')))
 
   if(any(is.na(data))){
     stop("The data set provided contains NA values!")
@@ -51,16 +51,16 @@ smoteTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
   s.y <- sort(y)
 
   if (is.matrix(rel)){
-    pc <- uba::phi.control(y, method="range", control.pts=rel)
+    pc <- IRon::phi.control(y, method="range", control.pts=rel)
   }else if(is.list(rel)){
     pc <- rel
   }else if(rel=="auto"){
-    pc <- uba::phi.control(y, method="extremes")
+    pc <- IRon::phi.control(y, method="extremes")
   }else{# TODO: handle other relevance functions and not using the threshold!
     stop("future work!")
   }
 
-  temp <- y.relev <- phi(s.y,pc)
+  temp <- y.relev <- IRon::phi(s.y,pc)
 
   if(!length(which(temp<1)))stop("All the points have relevance 1. Please, redefine your relevance function!")
   if(!length(which(temp>0)))stop("All the points have relevance 0. Please, redefine your relevance function!")
@@ -137,7 +137,7 @@ smoteTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
         for(pr in 1:r){
           probs <- c(probs,pr/r)
         }
-        s.rel <- phi(sdata[,tgt],pc)
+        s.rel <- IRon::phi(sdata[,tgt],pc)
         probsU <- probs*s.rel
 
         sel = tryCatch({
@@ -174,7 +174,7 @@ smoteTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
 #' @param p an integer used when a "p-norm" distance is selected
 #' @param pc relevance function
 #'
-#' @return
+#' @return SMOTEd Examples
 #'
 smote.exsTPhi <- function(data, tgt, N, k, dist, p, pc) {
 
@@ -211,7 +211,7 @@ smote.exsTPhi <- function(data, tgt, N, k, dist, p, pc) {
     for(i in 1:nT) {
       for(n in 1:nexs) {
         # select the nearest neighbour more recent and with higher phi
-        y.rel <- phi(data[kNNs[i,],tgt], pc)
+        y.rel <- IRon::phi(data[kNNs[i,],tgt], pc)
         pos.eval <- (kNNs[i,]/max(kNNs[i,]))*y.rel
         neig <- match(max(pos.eval), pos.eval)
         # the attribute values of the generated case
@@ -241,7 +241,7 @@ smote.exsTPhi <- function(data, tgt, N, k, dist, p, pc) {
     for (i in idx){
 
       # select the nearest neighbour more recent and with higher phi
-      y.rel <- phi(data[kNNs[i,],tgt], pc)
+      y.rel <- IRon::phi(data[kNNs[i,],tgt], pc)
       pos.eval <- (kNNs[i,]/max(kNNs[i,]))*y.rel
       neig <- match(max(pos.eval), pos.eval)
 

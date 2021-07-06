@@ -17,6 +17,3 @@ a data frame with the time delay embedding of the time series
 \description{
 Time series forecasting models usually assume the existence of a degree of correlation between successive values of the series. A form of modelling such correlation is to use previous values of the series as predictors of future value(s), in a procedure known as time delay embedding. This process allows the us of standard regression tools on time series forecasting tasks.
 }
-\examples{
-
-}

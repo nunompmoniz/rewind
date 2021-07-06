@@ -20,7 +20,7 @@ smote.exsT(data, tgt, N, k, dist, p)
 \item{p}{an integer used when a "p-norm" distance is selected}
 }
 \value{
-
+SMOTEd Examples
 }
 \description{
 The result of the function is a (N-1)*nrow(data) set of synthetically generated examples with rare values on the target

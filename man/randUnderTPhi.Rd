@@ -4,8 +4,14 @@
 \alias{randUnderTPhi}
 \title{Temporal and Relevance Biased Random Undersampling}
 \usage{
-randUnderTPhi(form, data, rel = "auto", thr.rel = 0.5,
-  C.perc = "balance", repl = FALSE)
+randUnderTPhi(
+  form,
+  data,
+  rel = "auto",
+  thr.rel = 0.5,
+  C.perc = "balance",
+  repl = FALSE
+)
 }
 \arguments{
 \item{form}{a model formula}

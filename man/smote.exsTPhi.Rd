@@ -22,7 +22,7 @@ smote.exsTPhi(data, tgt, N, k, dist, p, pc)
 \item{pc}{relevance function}
 }
 \value{
-
+SMOTEd Examples
 }
 \description{
 The result of the function is a (N-1)*nrow(data) set of synthetically generated examples with rare values on the target

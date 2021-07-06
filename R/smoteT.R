@@ -26,7 +26,7 @@
 smoteT <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
   k=5, repl=FALSE, dist="Euclidean", p=2) {
 
-  suppressWarnings(suppressPackageStartupMessages(library('uba')))
+  suppressWarnings(suppressPackageStartupMessages(library('IRon')))
 
   if(any(is.na(data))){
     stop("The data set provided contains NA values!")
@@ -50,16 +50,16 @@ smoteT <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
   s.y <- sort(y)
 
   if (is.matrix(rel)){
-    pc <- uba::phi.control(y, method="range", control.pts=rel)
+    pc <- IRon::phi.control(y, method="range", control.pts=rel)
   }else if(is.list(rel)){
     pc <- rel
   }else if(rel=="auto"){
-    pc <- uba::phi.control(y, method="extremes")
+    pc <- IRon::phi.control(y, method="extremes")
   }else{# TODO: handle other relevance functions and not using the threshold!
     stop("future work!")
   }
 
-  temp <- y.relev <- phi(s.y,pc)
+  temp <- y.relev <- IRon::phi(s.y,pc)
   if(!length(which(temp<1)))stop("All the points have relevance 1. Please, redefine your relevance function!")
   if(!length(which(temp>0)))stop("All the points have relevance 0. Please, redefine your relevance function!")
   temp[which(y.relev>thr.rel)] <- -temp[which(y.relev>thr.rel)]
@@ -160,7 +160,7 @@ smoteT <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
 #' @param dist the distance function used for the neighours computation
 #' @param p an integer used when a "p-norm" distance is selected
 #'
-#' @return
+#' @return SMOTEd Examples
 #'
 smote.exsT <- function(data, tgt, N, k, dist, p) {
 

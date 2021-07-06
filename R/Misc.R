@@ -8,11 +8,9 @@
 #' @return a data frame with the time delay embedding of the time series
 #' @export
 #'
-#' @examples
-#'
 create.data <- function(ts, embed = 10){
 
-  t <- index(ts)[-(1:(embed-1))]
+  t <- zoo::index(ts)[-(1:(embed-1))]
   e <- embed(ts,embed)[, embed:1]
   colnames(e) <- paste('V', 1:embed, sep='')
   d <- xts(e, t)

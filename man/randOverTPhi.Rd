@@ -4,11 +4,19 @@
 \alias{randOverTPhi}
 \title{Temporal and Relevance Biased Random Oversampling}
 \usage{
-randOverTPhi(form, dat, rel = "auto", thr.rel = 0.5,
-  C.perc = "balance", repl = TRUE)
+randOverTPhi(
+  form,
+  dat,
+  rel = "auto",
+  thr.rel = 0.5,
+  C.perc = "balance",
+  repl = TRUE
+)
 }
 \arguments{
 \item{form}{a model formula}
+
+\item{dat}{the original training set (with the unbalanced distribution)}
 
 \item{rel}{is the relevance determined automatically (default: "auto") or provided by the user through a matrix. See examples.}
 
@@ -18,8 +26,6 @@ randOverTPhi(form, dat, rel = "auto", thr.rel = 0.5,
 all/each "class" obtained with the relevance threshold. The percentage represents the percentage of replicas that are added. Replicas of the examples are added randomly in each "class". Moreover, different percentages may be provided for each "class". Alternatively, it may be "balance" (the default) or "extreme", cases where the over-sampling percentages are automatically estimated.}
 
 \item{repl}{is it allowed to perform sampling with replacement (bootstrapping). Defaults to TRUE because if the over-sampling percentage is >2 this is necessary.}
-
-\item{data}{the original training set (with the unbalanced distribution)}
 }
 \value{
 a new training data set resulting from the application of the resampling strategy

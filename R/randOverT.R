@@ -1,7 +1,7 @@
 #' Temporal Biased Random Oversampling
 #'
 #' @param form a model formula
-#' @param data the original training set (with the unbalanced distribution)
+#' @param dat the original training set (with the unbalanced distribution)
 #' @param rel is the relevance determined automatically (default: "auto") or provided by the user through a matrix. See examples.
 #' @param thr.rel is the relevance threshold above which a case is considered as an extreme value
 #' @param C.perc is a list containing the over-sampling percentage/s to apply to
@@ -36,16 +36,16 @@ randOverT <- function(form, dat, rel = "auto", thr.rel = 0.5,
 
   s.y <- sort(y)
   if (is.matrix(rel)) {
-    pc <- phi.control(y, method = "range", control.pts = rel)
+    pc <- IRon::phi.control(y, method = "range", control.pts = rel)
   } else if (is.list(rel)) {
     pc <- rel
   } else if (rel == "auto") {
-    pc <- phi.control(y, method = "extremes")
+    pc <- IRon::phi.control(y, method = "extremes")
   } else {# TODO: handle other relevance functions and not using the threshold!
     stop("future work!")
   }
 
-  temp <- y.relev <- phi(s.y, pc)
+  temp <- y.relev <- IRon::phi(s.y, pc)
   if (!length(which(temp < 1))) {
     stop("All the points have relevance 1. Please, redefine your relevance
       function!")
@@ -75,7 +75,7 @@ randOverT <- function(form, dat, rel = "auto", thr.rel = 0.5,
   }
   obs.ind[[nbump]] <- s.y[last:length(s.y)]
 
-  imp <- sapply(obs.ind, function(x) mean(phi(x, pc)))
+  imp <- sapply(obs.ind, function(x) mean(IRon::phi(x, pc)))
 
   ove <- which(imp >= thr.rel)
   und <- which(imp < thr.rel)

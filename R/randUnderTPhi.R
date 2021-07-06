@@ -21,7 +21,7 @@
 #'
 randUnderTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance", repl=FALSE) {
 
-  suppressWarnings(suppressPackageStartupMessages(library('uba')))
+  suppressWarnings(suppressPackageStartupMessages(library('IRon')))
 
   if(any(is.na(data))) stop("The data set provided contains NA values!")
 
@@ -33,16 +33,16 @@ randUnderTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
   s.y <- sort(y)
 
   if (is.matrix(rel)){
-    pc <- uba::phi.control(y, method="range", control.pts=rel)
+    pc <- IRon::phi.control(y, method="range", control.pts=rel)
   }else if(is.list(rel)){
     pc <- rel
   }else if(rel=="auto"){
-    pc <- uba::phi.control(y, method="extremes")
+    pc <- IRon::phi.control(y, method="extremes")
   }else{# TODO: handle other relevance functions and not using the threshold!
     stop("future work!")
   }
 
-  temp <- y.relev <- phi(s.y,pc)
+  temp <- y.relev <- IRon::phi(s.y,pc)
   if(!length(which(temp<1)))stop("All the points have relevance 1. Please, redefine your relevance function!")
   if(!length(which(temp>0)))stop("All the points have relevance 0. Please, redefine your relevance function!")
 
@@ -61,7 +61,7 @@ randUnderTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
   }
   obs.ind[[nbumps]] <- s.y[last:length(s.y)]
 
-  imp <- sapply(obs.ind, function(x)mean(phi(x,pc)))
+  imp <- sapply(obs.ind, function(x)mean(IRon::phi(x,pc)))
 
   und <- which(imp<thr.rel)
   ove <- which(imp>thr.rel)
@@ -99,7 +99,7 @@ randUnderTPhi <- function(form, data, rel="auto", thr.rel=0.5, C.perc="balance",
     for(k in 1:r){
       probs <- c(probs,k/r)
     }
-    s.rel <- phi(sdata[,tgt],pc)
+    s.rel <- IRon::phi(sdata[,tgt],pc)
     probsU <- probs*s.rel
 
     sel <- c()

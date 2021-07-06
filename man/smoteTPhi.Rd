@@ -4,9 +4,18 @@
 \alias{smoteTPhi}
 \title{Temporal and Relevance Biased SMOTE}
 \usage{
-smoteTPhi(form, data, rel = "auto", thr.rel = 0.5,
-  C.perc = "balance", k = 5, repl = FALSE, dist = "Euclidean",
-  p = 2, delta = 0.01)
+smoteTPhi(
+  form,
+  data,
+  rel = "auto",
+  thr.rel = 0.5,
+  C.perc = "balance",
+  k = 5,
+  repl = FALSE,
+  dist = "Euclidean",
+  p = 2,
+  delta = 0.01
+)
 }
 \arguments{
 \item{form}{a model formula}

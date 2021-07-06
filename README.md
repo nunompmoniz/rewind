@@ -8,6 +8,7 @@ For Imbalanced Domain Learning, resampling strategies are some of the most known
 **To install from github use the following command lines in R:**
 
     library(devtools)  # You need to install this package!
+    install_github("nunompmoniz/IRon",ref="master")
     install_github("nunompmoniz/rewind",ref="master")
 
 After installation the package can be used loaded by doing:
